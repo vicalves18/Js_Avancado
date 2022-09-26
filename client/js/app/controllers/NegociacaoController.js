@@ -13,23 +13,9 @@ class NegociacaoController{
     adiciona(event){
         //evita que a pagina recarregue 
         event.preventDefault();
-        //--Convertendo String = Date (Ano-Mes-Dia)--
-        
-            /*Forma mais fácil para converter
-            *let data = new Date(this._inputData.value.split('-'));
-            *let data = new Date(this._inputData.value.replace(/-/g, ',')); -- Igual mas em Expressão Regular(troca o - por ,)
-            */
 
-        //Usando paradigma funcional para converter
-        let data = new Date(
-            //... -> Spred Operator, indica que o array é desmembrado
-            ...this._inputData.value.split('-')
-            .map((item,indice)=>item - indice % 2) //arrow function
-                //se for o segundo item do array que é o mês
-                /*if(indice == 1){
-                *    return item - 1;
-                }*/
-        );
+        let helper = new DateHelper();
+        let data = helper.textoParaData(this._inputData.value);
 
         //Atraves do value que consegue acessar o valor do formulario
         let negociacao = new Negociacao(
@@ -38,6 +24,7 @@ class NegociacaoController{
            this._inputValor.value
         );
         console.log(negociacao);
+        console.log(helper.dataParaTexto(negociacao.data));
 
         //descobrir tipo do parametro passado 
         //console.log(typeof(this._inputData.value));
