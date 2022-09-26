@@ -1,9 +1,9 @@
-class NegociacoesView{
+class NegociacoesView extends View{
     constructor(elemento){
-        this._elemento = elemento;
+        super(elemento);
     }
 
-    _template(model){
+    template(model){
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -29,20 +29,18 @@ class NegociacoesView{
             <tfoot>
                 <td colspan="3"></td>
                 <td>${
-                    (function(){
+                    /*(function(){
                         let total = 0;
                         model.negociacoes.forEach(n => total += n.volume);
                         return total;
-                    })()//IIFE - Immediately-invoked-function, função imediata
-                }</td>
+                    })()//IIFE - Immediately-invoked-function, função imediata*/
+                    /*Arrow Function
+                    Reduce - Função redutora */
+                    model.negociacoes.reduce((total, n) => total + n.volume,0.0)} 
+                </td>
             </tfoot>
         </table>
         `;
     }
-
-    update(model){
-        this._elemento.innerHTML = this._template(model);
-    }
-
 }
 
