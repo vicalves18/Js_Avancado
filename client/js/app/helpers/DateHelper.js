@@ -6,7 +6,6 @@ class DateHelper{
     static dataParaTexto(data){
         //${} Template Strings
         return `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`;
-      
      }
 
     static textoParaData(texto){
